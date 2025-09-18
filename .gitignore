@@ -20,6 +20,7 @@ Thumbs.db
 allure-results/
 allure-report/
 .allure-results/
+allure_results/
 
 # IDEs and editors
 .vscode/
