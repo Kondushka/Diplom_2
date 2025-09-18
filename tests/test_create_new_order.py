@@ -66,7 +66,3 @@ class TestCreateOrder:
             assert response.status_code == 400
             assert response.json()['message'] == Response.MESSAGE_FALSE_INGREDIENT
             
-            
-    
-            
-        #@allure.step('Получение ингредиентов')
