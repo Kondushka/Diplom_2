@@ -30,12 +30,10 @@ class TestCreatUser:
         
         
     @allure.title('Создание пользователя без обязательного поля')
-    @pytest.mark.parametrize('login, password,  missing_field', [('123@gmail.com', '', 'password'), ('', '123Q', 'email') ])
-    def test_create_user_without_data(self, login, password, missing_field):
-        user = {
-            "email": login, 
-            "password": password
-        }
+    @pytest.mark.parametrize('missing_field', ["password", "email"])
+    def test_create_user_without_data(self, user_data, missing_field):
+        user = user_data.copy()
+        user[missing_field] = ''
         
         with allure.step(f'Пытаемся создать пользователя без обязательного поля: {missing_field}'):
             response = requests.post(Api.CREATE_NEW_USER_API, json = user, timeout=10)

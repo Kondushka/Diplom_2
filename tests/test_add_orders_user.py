@@ -2,11 +2,12 @@ import requests
 import allure
 from data.api import Api
 from data.response import Response
+from data.ingredient import Ingredients as I
 
 @allure.suite('Тесты: получение заказов')
 @allure.sub_suite('Получение заказов конкретного пользователя')
 class TestAddOrder:
-    
+
     @allure.title('Попытка получения заказов пользователя без авторизации')
     def test_add_order_without_login(self):
         response = requests.get(Api.ORDER_API)
@@ -25,7 +26,7 @@ class TestAddOrder:
             assert len(orders) == 0
             
         with allure.step('Добавляем заказ'):
-            add_order = requests.post(Api.ORDER_API, headers = {"Authorization": create_user["access_token"]}, json = {"ingredients": ["61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa6f"]})
+            add_order = requests.post(Api.ORDER_API, headers = {"Authorization": create_user["access_token"]}, json = {"ingredients": [I.BUN, I.SAUCE, I.CHEESE, I.FILLET]})
             assert add_order.status_code == 200
             
             

@@ -2,16 +2,22 @@ import pytest
 import allure
 import requests
 from data.api import Api
+from data.helpers import create_user_data
 
 
 @pytest.fixture()
 def user_data():
+    return create_user_data()
+
+@pytest.fixture()
+def change_user_data(user_data):
     return {
-            "email": "123qtest-data@yandex.ru", 
-            "password": "123Q", 
-            "name": "123Q"
-        }
+        "email": f'chance_{user_data["email"]}',
+        "password": f'chance_{user_data["password"]}',
+        "name": f'chance_{user_data["name"]}'    
+    }
     
+
 @pytest.fixture()  
 def create_user(user_data):
 
